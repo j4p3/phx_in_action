@@ -20,6 +20,12 @@ defmodule Auction do
   @spec new_item :: Ecto.Changeset.t()
   def new_item(), do: Item.changeset(%Item{})
 
+  @spec edit_item(integer) :: Ecto.Changeset.t()
+  def edit_item(id) do
+    @repo.get!(Item, id)
+    |> Item.changeset()
+  end
+
   @spec insert_item(Map) :: {:ok, Item} | {:error, struct}
   def insert_item(attrs) do
     %Item{}
