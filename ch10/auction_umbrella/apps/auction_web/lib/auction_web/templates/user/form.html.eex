@@ -1,0 +1,25 @@
+<%= form_for @user, @action, fn f -> %>
+  <%= if @user.action do %>
+    <div class="alert alert-danger">
+      Nope, correct errors below:
+    </div>
+  <% end  %>
+
+  <%= label f, :username %>
+  <%= error_tag f, :username %>
+  <%= text_input f, :username %>
+
+  <%= label f, :email_address %>
+  <%= error_tag f, :email_address %>
+  <%= text_input f, :email_address %>
+
+  <%= label f, :password %>
+  <%= error_tag f, :password %>
+  <%= password_input f, :password %>
+
+  <%= label f, :password_confirmation %>
+  <%= error_tag f, :password_confirmation %>
+  <%= password_input f, :password_confirmation %>
+
+  <div><%= submit "Submit" %></div>
+<% end %>
