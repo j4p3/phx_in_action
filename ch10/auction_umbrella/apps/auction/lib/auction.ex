@@ -1,5 +1,5 @@
 defmodule Auction do
-  alias Auction.{Repo, Item, User}
+  alias Auction.{Repo, Item, User, Password}
   @repo Auction.Repo
 
   @spec list_items :: [Item]
@@ -51,5 +51,15 @@ defmodule Auction do
     %User{}
     |> User.changeset_with_password(params)
     |> @repo.insert
+  end
+
+  @spec authenticate_user(bitstring(), bitstring()) :: User | {:error, bitstring()}
+  def authenticate_user(username, password) do
+    with user when not is_nil(user) <- @repo.get_by(User, %{username: username}),
+         true <- Password.verify_with_hash(password, user.hashed_password) do
+      user
+    else
+      _ -> Password.dummy_verify()
+    end
   end
 end
