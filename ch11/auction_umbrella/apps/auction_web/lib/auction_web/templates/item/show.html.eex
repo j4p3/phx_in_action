@@ -1,0 +1,29 @@
+<section class="row">
+  <article class="column">
+    <h1><%= @item.title %></h1>
+    <ul>
+      <li><strong>Description:</strong> <%= @item.description %></li>
+      <li><strong>Ends at:</strong> <%= @item.ends_at %></li>
+    </ul>
+  </article>
+  <%= if @current_user do %>
+    <article>
+      <h2>Place a bid</h2>
+      <%= form_for @bid, Routes.item_bid_path(@conn, :create, @item), fn f -> %>
+        <%= if @bid.action do %>
+          <div class="alert alert-danger">
+            Errors, correct:
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= label f, :amount, "Bid amount", class: "control-label" %>
+          <%= error_tag f, :amount %>
+          <%= number_input f, :amount, class: "form-control" %>
+        </div>
+
+        <%= submit "Submit bid", class: "btn btn-primary" %>
+      <% end %>
+    </article>
+  <% end %>
+</section>

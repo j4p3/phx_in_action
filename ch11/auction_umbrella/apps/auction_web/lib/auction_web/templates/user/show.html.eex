@@ -1,0 +1,8 @@
+<section class="row">
+  <article class="column">
+    <h1><%= @user.username %></h1>
+    <ul>
+      <li><strong>Email address:</strong> <%= @user.email_address %></li>
+    </ul>
+  </article>
+</section>
