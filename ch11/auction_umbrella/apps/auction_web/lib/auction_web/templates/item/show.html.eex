@@ -6,8 +6,17 @@
       <li><strong>Ends at:</strong> <%= @item.ends_at %></li>
     </ul>
   </article>
+</section>
+<section class="row">
+  <article class="column">
+    <h2>Current bids</h2>
+    <%= for bid <- @item.bids do %>
+      <p><b><%= formatted_datetime(bid.inserted_at) %></b> - <%= integer_to_currency(bid.amount) %> <em>from <%= bid.user.username %></em></p>
+    <% end %>
+  </article>
+
   <%= if @current_user do %>
-    <article>
+    <article class="column">
       <h2>Place a bid</h2>
       <%= form_for @bid, Routes.item_bid_path(@conn, :create, @item), fn f -> %>
         <%= if @bid.action do %>

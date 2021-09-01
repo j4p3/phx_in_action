@@ -1,5 +1,6 @@
 defmodule Auction do
   alias Auction.{Repo, Bid, Item, User, Password}
+  import Ecto.Query
   @repo Repo
 
   @spec list_items :: [Item]
@@ -10,6 +11,22 @@ defmodule Auction do
   @spec get_item(integer()) :: Item | nil
   def get_item(id) do
     @repo.get!(Item, id)
+  end
+
+  @spec get_item_with_bids(integer) :: Item | nil
+  def get_item_with_bids(id) do
+    get_item(id)
+    |> @repo.preload(bids: [:user])
+  end
+
+  @spec get_bids_for_user(User) :: [Bid] | []
+  def get_bids_for_user(user) do
+    Bid
+    |> where([b], b.user_id == ^user.id)
+    |> order_by([b], desc: b.inserted_at)
+    |> preload(:item)
+    |> limit(10)
+    |> @repo.all()
   end
 
   @spec get_item_by(Map) :: [Item] | nil
