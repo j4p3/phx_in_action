@@ -10,9 +10,9 @@
 <section class="row">
   <article class="column">
     <h2>Current bids</h2>
-    <%= for bid <- @item.bids do %>
-      <p><b><%= formatted_datetime(bid.inserted_at) %></b> - <%= integer_to_currency(bid.amount) %> <em>from <%= bid.user.username %></em></p>
-    <% end %>
+    <div id="bids">
+      <%= render_many(@item.bids, AuctionWeb.BidView, "bid.html") %>
+    </div>
   </article>
 
   <%= if @current_user do %>

@@ -1,0 +1,3 @@
+<p>
+  <b><%= formatted_datetime(@bid.inserted_at) %></b> - <%= integer_to_currency(@bid.amount) %> <em>from <%= Map.get(@bid.user, :username) || @username %></em>
+</p>

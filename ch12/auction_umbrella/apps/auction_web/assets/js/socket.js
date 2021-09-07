@@ -61,6 +61,13 @@ if (match) {
   
   // Now that you are connected, you can join channels with a topic:
   let channel = socket.channel(`item:${itemId}`, {})
+
+  channel.on("new_bid", data => {
+    console.log("new_bid received", data)
+    const target = document.getElementById("bids")
+    target.insertAdjacentHTML("afterbegin", data.body)
+  })
+
   channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
