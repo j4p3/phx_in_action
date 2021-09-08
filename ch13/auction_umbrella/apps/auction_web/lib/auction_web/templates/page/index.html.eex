@@ -1,0 +1,16 @@
+<section class="row">
+  <h1>Page Index</h1>
+</section>
+
+<section class="row">
+  <article class="column">
+    <ul>
+      <%= for item <- @items do %>
+        <li>
+          <strong><%= item.title %></strong>:
+          <%= item.description %>
+        </li>
+      <% end %>
+    </ul>
+  </article>
+</section>

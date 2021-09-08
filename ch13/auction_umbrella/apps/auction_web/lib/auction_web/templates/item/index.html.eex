@@ -1,0 +1,18 @@
+<section class="row">
+  <h1>Item Index</h1>
+</section>
+
+<section class="row">
+  <article class="column">
+    <ul>
+      <%= for item <- @items do %>
+        <li>
+          <strong>
+            <%= link(item.title, to: Routes.item_path(@conn, :show, item)) %>
+          </strong>:
+          <%= item.description %>
+        </li>
+      <% end %>
+    </ul>
+  </article>
+</section>
