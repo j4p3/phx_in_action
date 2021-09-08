@@ -1,0 +1,10 @@
+defmodule AuctionWeb.Api.UserView do
+  use AuctionWeb, :view
+
+  def render("user.json", %{user: user}) do
+    %{
+      id: user.id,
+      username: user.username
+    }
+  end
+end
